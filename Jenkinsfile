@@ -2,19 +2,18 @@ pipeline {
     agent any
 
     triggers {
-        cron('H/3 * * * 4')  // Every 3 minutes on Thursdays
+        cron('H/3 * * * 4')  // Runs every 3 minutes on Thursdays
     }
 
     stages {
         stage('Build') {
             steps {
                 bat 'mvnw clean install'
-
             }
         }
         stage('Test with JaCoCo') {
             steps {
-                bat './mvnw test'
+                bat 'mvnw test'
             }
             post {
                 always {
