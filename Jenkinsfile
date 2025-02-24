@@ -8,12 +8,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './mvnw clean install'
+                bat 'mvnw clean install'
+
             }
         }
         stage('Test with JaCoCo') {
             steps {
-                sh './mvnw test'
+                bat './mvnw test'
             }
             post {
                 always {
