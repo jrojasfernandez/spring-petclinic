@@ -14,14 +14,12 @@ pipeline {
         stage('Test with JaCoCo') {
             steps {
                 bat 'mvnw test'
-            }
-            post {
-                always {
-                    jacoco execPattern: '**/target/jacoco.exec',
-                           classPattern: '**/target/classes',
-                           sourcePattern: '**/src/main/java',
-                           exclusionPattern: '**/target/test-classes'
-                }
+                step([$class: 'JacocoPublisher',
+                      execPattern: '**/target/jacoco.exec',
+                      classPattern: '**/target/classes',
+                      sourcePattern: '**/src/main/java',
+                      exclusionPattern: '**/target/test-classes'
+                ])
             }
         }
     }
